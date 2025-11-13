@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bebem ❤️</title>
+  <title>Zeynep Aşkım 💖</title>
   <style>
     body {
       background-color: #ffe6f2;
       font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
       margin-top: 15%;
+      overflow: hidden;
     }
+
     h1 {
       color: #ff3385;
       font-size: 2em;
+      transition: all 0.5s ease;
     }
+
     button {
       background-color: #ff66a3;
       color: white;
@@ -26,9 +30,49 @@
       cursor: pointer;
       transition: 0.3s;
     }
+
     button:hover {
       background-color: #ff3385;
       transform: scale(1.1);
+    }
+
+    /* Kalpler */
+    .heart {
+      position: fixed;
+      bottom: 0;
+      color: #ff66b2;
+      font-size: 20px;
+      animation: floatUp 3s ease-in forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* Yanıp sönen yazı */
+    .ozur {
+      font-size: 2.2em;
+      font-weight: bold;
+      margin-top: 40px;
+      animation: renkDegis 1.5s infinite alternate;
+      text-shadow: 0 0 15px #fff, 0 0 30px #ff99cc, 0 0 45px #ff4da6;
+      display: none;
+    }
+
+    @keyframes renkDegis {
+      0% { color: #ff0066; text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff0066; }
+      25% { color: #ff33cc; text-shadow: 0 0 20px #cc33ff, 0 0 40px #ff33cc; }
+      50% { color: #33ccff; text-shadow: 0 0 20px #00ffff, 0 0 40px #33ccff; }
+      75% { color: #00ff99; text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ff99; }
+      100% { color: #ffff33; text-shadow: 0 0 20px #ffcc00, 0 0 40px #ffff33; }
     }
   </style>
 </head>
@@ -39,19 +83,40 @@
     <button id="hayir">Hayır</button>
   </div>
 
+  <div class="ozur" id="ozur">
+    💖 ÖZÜR DİLERİM ZEYNEP AŞKIM BİRTANEM GÜZELİM 💖
+  </div>
+
   <script>
     const evet = document.getElementById('evet');
     const hayir = document.getElementById('hayir');
     const yazi = document.getElementById('yazi');
+    const butonlar = document.getElementById('butonlar');
+    const ozur = document.getElementById('ozur');
 
     evet.addEventListener('click', () => {
-      yazi.textContent = 'SENİ ÇOOOOKKKKKKK SEVİYORUM BEBEMMM ❤️';
-      document.getElementById('butonlar').style.display = 'none';
+      yazi.textContent = 'SENİ ÇOOOOOOKKKKK SEVİYORUM BEBEM ❤️';
+      butonlar.style.display = 'none';
+      ozur.style.display = 'block';
+      kalplerUcur();
     });
 
     hayir.addEventListener('click', () => {
       hayir.style.display = 'none';
     });
+
+    function kalplerUcur() {
+      for (let i = 0; i < 40; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+      setTimeout(kalplerUcur, 800);
+    }
   </script>
 </body>
 </html>
