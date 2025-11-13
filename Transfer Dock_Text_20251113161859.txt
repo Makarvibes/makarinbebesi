@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bebem ❤️</title>
+  <style>
+    body {
+      background-color: #ffe6f2;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      margin-top: 15%;
+    }
+    h1 {
+      color: #ff3385;
+      font-size: 2em;
+    }
+    button {
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff3385;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1 id="yazi">Barışalım mı BEBEM? 💕</h1>
+  <div id="butonlar">
+    <button id="evet">Evet</button>
+    <button id="hayir">Hayır</button>
+  </div>
+
+  <script>
+    const evet = document.getElementById('evet');
+    const hayir = document.getElementById('hayir');
+    const yazi = document.getElementById('yazi');
+
+    evet.addEventListener('click', () => {
+      yazi.textContent = 'SENİ ÇOOOOKKKKKKK SEVİYORUM BEBEMMM ❤️';
+      document.getElementById('butonlar').style.display = 'none';
+    });
+
+    hayir.addEventListener('click', () => {
+      hayir.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
