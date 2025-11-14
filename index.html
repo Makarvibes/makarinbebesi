@@ -1,39 +1,112 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Başlığı</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bebeem 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: pink;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+    }
 
-  body {
-    display: flex;
-    justify-content: center; /* yatay ortalama */
-    align-items: center;     /* dikey ortalama */
-    flex-direction: column;  /* yazı ve diğer öğeleri alt alta hizalar */
-    background-color: #f0f0f0;
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
+    .yazi {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      font-weight: bold;
+      color: #ff0066;
+      text-shadow: 0 0 20px white, 0 0 40px #ff99cc;
+      animation: parilti 1.5s infinite alternate;
+      z-index: 10;
+      width: 100%;
+    }
 
-  h1 {
-    margin-bottom: 20px; /* biraz boşluk bırakır */
-  }
+    @keyframes parilti {
+      0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+    }
 
-  audio {
-    display: none; /* müzik çalar ama görünmez */
-  }
-</style>
+    .kalp {
+      position: fixed;
+      font-size: 25px;
+      animation: yokOl 1.5s ease-out forwards;
+    }
+
+    @keyframes yokOl {
+      0% { transform: scale(0); opacity: 1; }
+      50% { transform: scale(2); opacity: 1; }
+      100% { transform: scale(4); opacity: 0; }
+    }
+
+    .tap {
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.2em;
+      color: #ff0077;
+      text-shadow: 0 0 10px white;
+      animation: fade 1.2s infinite alternate;
+    }
+
+    @keyframes fade {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    audio {
+      display: none; /* görünmez olacak */
+    }
+  </style>
 </head>
 <body>
-  <h1>Merhaba, hoşgeldiniz!</h1>
 
-  <!-- MP3 Çalma -->
-  <audio src="music.mp3" autoplay loop></audio>
+  <div class="yazi">GÜNAYDIIIIINNN BEBEEEEMMMMMM 💖</div>
+
+  <div class="tap">Müziğin açılması için ekrana bir kez dokun 💞</div>
+
+  <!-- MP3 MÜZİK -->
+  <audio id="muzik" src="music.mp3" loop></audio>
+
+  <script>
+    // Kalpler
+    function kalpPatlat() {
+      const kalp = document.createElement("div");
+      kalp.classList.add("kalp");
+      kalp.textContent = "💖";
+
+      kalp.style.left = Math.random() * 100 + "vw";
+      kalp.style.top = Math.random() * 100 + "vh";
+
+      document.body.appendChild(kalp);
+
+      setTimeout(() => kalp.remove(), 1500);
+    }
+    setInterval(kalpPatlat, 300);
+
+    // Müzik tıklayınca başlasın (tarayıcı izinleri için gerekli)
+    let muzikAcildi = false;
+
+    document.body.addEventListener("click", () => {
+      if (!muzikAcildi) {
+        const muzik = document.getElementById("muzik");
+        muzik.play(); // mp3 başlar
+        muzikAcildi = true;
+
+        document.querySelector(".tap").style.display = "none";
+      }
+    });
+  </script>
+
 </body>
 </html>
