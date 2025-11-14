@@ -1,117 +1,84 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bebeem 💖</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bebeemmm</title>
+
+<style>
     body {
-      margin: 0;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: pink;
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      overflow: hidden;
-      position: relative;
-      text-align: center;
+        margin: 0;
+        background: #ffb6d9;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
     }
 
-    .yazi {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 3em;
-      font-weight: bold;
-      color: #ff0066;
-      text-shadow: 0 0 20px white, 0 0 40px #ff99cc;
-      animation: parilti 1.5s infinite alternate;
-      z-index: 10;
-      width: 100%;
+    h1 {
+        font-size: 45px;
+        color: white;
+        text-shadow: 0 0 15px #ff005d, 0 0 30px #ff3b8b;
+        animation: glow 1s infinite alternate;
+        position: absolute;
+        top: 40%;
+        transform: translateY(-50%);
     }
 
-    @keyframes parilti {
-      0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+    @keyframes glow {
+        from { text-shadow: 0 0 10px #ff3b8b; }
+        to   { text-shadow: 0 0 25px #ff005d; }
     }
 
-    .kalp {
-      position: fixed;
-      font-size: 25px;
-      animation: yokOl 1.5s ease-out forwards;
+    .heart {
+        position: absolute;
+        font-size: 25px;
+        color: red;
+        animation: rise 3s linear forwards;
     }
 
-    @keyframes yokOl {
-      0% { transform: scale(0); opacity: 1; }
-      50% { transform: scale(2); opacity: 1; }
-      100% { transform: scale(4); opacity: 0; }
+    @keyframes rise {
+        from {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-150vh) scale(1.8);
+            opacity: 0;
+        }
     }
-
-    iframe {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-    }
-
-    .tap {
-      position: absolute;
-      bottom: 20px;
-      font-size: 1.2em;
-      color: #ff0077;
-      text-shadow: 0 0 10px white;
-      animation: fade 1.2s infinite alternate;
-    }
-
-    @keyframes fade {
-      from { opacity: 0.4; }
-      to { opacity: 1; }
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <div class="yazi">GÜNAYDIIIIINNN BEBEEEEMMMMMM 💖</div>
+<!-- YAZI ORTADA -->
+<h1>GÜNAYDIIIIINNN BEBEEEEMMMMMM ❤️</h1>
 
-  <div class="tap">Müziğin açılması için ekrana bir kez dokun 💞</div>
+<!-- MÜZİK OTOMATİK ÇALSIN -->
+<audio id="music" src="music.mp3" autoplay loop></audio>
 
-  <!-- YouTube sesli oynatma (senin verdiğin müzik) -->
-  <iframe 
-    id="player"
-    src="https://www.youtube.com/embed/Zc8iMeQczZs?enablejsapi=1&mute=1&loop=1&playlist=Zc8iMeQczZs">
-  </iframe>
+<script>
+    // Kalp üretme efektleri
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
 
-  <script>
-    function kalpPatlat() {
-      const kalp = document.createElement("div");
-      kalp.classList.add("kalp");
-      kalp.textContent = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "90vh";
 
-      kalp.style.left = Math.random() * 100 + "vw";
-      kalp.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(heart);
 
-      document.body.appendChild(kalp);
-
-      setTimeout(() => kalp.remove(), 1500);
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
     }
-    setInterval(kalpPatlat, 300);
 
-    let muzikAcildi = false;
-
-    document.body.addEventListener("click", () => {
-      if (!muzikAcildi) {
-        const player = document.querySelector("#player").contentWindow;
-        player.postMessage('{"event":"command","func":"unMute","args":""}', "*");
-        player.postMessage('{"event":"command","func":"playVideo","args":""}', "*");
-
-        muzikAcildi = true;
-        document.querySelector(".tap").style.display = "none";
-      }
-    });
-  </script>
+    setInterval(createHeart, 300);
+</script>
 
 </body>
 </html>
