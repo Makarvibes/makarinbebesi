@@ -1,84 +1,39 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bebeemmm</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Başlığı</title>
 <style>
-    body {
-        margin: 0;
-        background: #ffb6d9;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: Arial, sans-serif;
-    }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
 
-    h1 {
-        font-size: 45px;
-        color: white;
-        text-shadow: 0 0 15px #ff005d, 0 0 30px #ff3b8b;
-        animation: glow 1s infinite alternate;
-        position: absolute;
-        top: 40%;
-        transform: translateY(-50%);
-    }
+  body {
+    display: flex;
+    justify-content: center; /* yatay ortalama */
+    align-items: center;     /* dikey ortalama */
+    flex-direction: column;  /* yazı ve diğer öğeleri alt alta hizalar */
+    background-color: #f0f0f0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
 
-    @keyframes glow {
-        from { text-shadow: 0 0 10px #ff3b8b; }
-        to   { text-shadow: 0 0 25px #ff005d; }
-    }
+  h1 {
+    margin-bottom: 20px; /* biraz boşluk bırakır */
+  }
 
-    .heart {
-        position: absolute;
-        font-size: 25px;
-        color: red;
-        animation: rise 3s linear forwards;
-    }
-
-    @keyframes rise {
-        from {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-        to {
-            transform: translateY(-150vh) scale(1.8);
-            opacity: 0;
-        }
-    }
+  audio {
+    display: none; /* müzik çalar ama görünmez */
+  }
 </style>
 </head>
-
 <body>
+  <h1>Merhaba, hoşgeldiniz!</h1>
 
-<!-- YAZI ORTADA -->
-<h1>GÜNAYDIIIIINNN BEBEEEEMMMMMM ❤️</h1>
-
-<!-- MÜZİK OTOMATİK ÇALSIN -->
-<audio id="music" src="music.mp3" autoplay loop></audio>
-
-<script>
-    // Kalp üretme efektleri
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "❤️";
-
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = "90vh";
-
-        document.body.appendChild(heart);
-
-        setTimeout(() => {
-            heart.remove();
-        }, 3000);
-    }
-
-    setInterval(createHeart, 300);
-</script>
-
+  <!-- MP3 Çalma -->
+  <audio src="music.mp3" autoplay loop></audio>
 </body>
 </html>
