@@ -8,26 +8,34 @@
     body {
       margin: 0;
       height: 100vh;
+      width: 100vw;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: pink;
       font-family: "Comic Sans MS", cursive, sans-serif;
       overflow: hidden;
+      position: relative;
+      text-align: center;
     }
 
     .yazi {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-size: 3em;
       font-weight: bold;
       color: #ff0066;
       text-shadow: 0 0 20px white, 0 0 40px #ff99cc;
       animation: parilti 1.5s infinite alternate;
       z-index: 10;
+      width: 100%;
     }
 
     @keyframes parilti {
-      0% { opacity: 0.8; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.05); }
+      0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
     }
 
     .kalp {
@@ -42,24 +50,38 @@
       100% { transform: scale(4); opacity: 0; }
     }
 
-    /* YouTube gizli oynatıcı */
     iframe {
       position: absolute;
       width: 1px;
       height: 1px;
       opacity: 0;
     }
+
+    .tap {
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.2em;
+      color: #ff0077;
+      text-shadow: 0 0 10px white;
+      animation: fade 1.2s infinite alternate;
+    }
+
+    @keyframes fade {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Yazı -->
   <div class="yazi">GÜNAYDIIIIINNN BEBEEEEMMMMMM 💖</div>
 
-  <!-- YouTube arka plan müziği (gizli oynatıcı) -->
-  <iframe
-    src="https://www.youtube.com/embed/Dl8N3HD38Ls?autoplay=1&mute=0&loop=1&playlist=Dl8N3HD38Ls"
-    allow="autoplay">
+  <div class="tap">Müziğin açılması için ekrana bir kez dokun 💞</div>
+
+  <!-- YouTube sesli oynatma (senin verdiğin müzik) -->
+  <iframe 
+    id="player"
+    src="https://www.youtube.com/embed/Zc8iMeQczZs?enablejsapi=1&mute=1&loop=1&playlist=Zc8iMeQczZs">
   </iframe>
 
   <script>
@@ -75,8 +97,20 @@
 
       setTimeout(() => kalp.remove(), 1500);
     }
-
     setInterval(kalpPatlat, 300);
+
+    let muzikAcildi = false;
+
+    document.body.addEventListener("click", () => {
+      if (!muzikAcildi) {
+        const player = document.querySelector("#player").contentWindow;
+        player.postMessage('{"event":"command","func":"unMute","args":""}', "*");
+        player.postMessage('{"event":"command","func":"playVideo","args":""}', "*");
+
+        muzikAcildi = true;
+        document.querySelector(".tap").style.display = "none";
+      }
+    });
   </script>
 
 </body>
